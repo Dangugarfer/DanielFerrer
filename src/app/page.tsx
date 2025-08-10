@@ -61,7 +61,7 @@ const WhatsappIcon = (props: React.SVGProps<SVGSVGElement>) => (
   );
 
 const ProjectCard = ({ project, priority = false }: { project: Project, priority?: boolean }) => (
-  <Card className="group relative overflow-hidden transition-all duration-300 hover:shadow-2xl hover:shadow-primary/20 hover:-translate-y-1">
+  <Card className="group relative overflow-hidden transition-all duration-300 hover:shadow-2xl hover:shadow-primary/20 hover:-translate-y-1 flex flex-col">
      <div className="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-primary/10 opacity-0 transition-opacity duration-500 group-hover:opacity-100 card-glow"></div>
     <CardHeader className="p-0">
       <Dialog>
@@ -109,16 +109,17 @@ const ProjectCard = ({ project, priority = false }: { project: Project, priority
         </DialogContent>
       </Dialog>
     </CardHeader>
-    <CardContent className="p-6">
-      <h3 className="text-xl font-bold font-headline">{project.title}</h3>
-      <p className="text-sm text-muted-foreground mt-2 h-12">{project.description}</p>
-      <div className="mt-4 flex flex-wrap gap-2">
-        {project.technologies.map((tech) => (
-          <Badge key={tech} variant="secondary">{tech}</Badge>
-        ))}
+    <CardContent className="p-6 flex-grow flex flex-col min-h-[140px]">
+      <div className="flex-grow">
+        <h3 className="text-xl font-bold font-headline">{project.title}</h3>
+        <div className="mt-4 flex flex-wrap gap-2">
+          {project.technologies.map((tech) => (
+            <Badge key={tech} variant="secondary">{tech}</Badge>
+          ))}
+        </div>
       </div>
     </CardContent>
-    <CardFooter className="p-6 bg-muted/50">
+    <CardFooter className="p-6 bg-muted/50 mt-auto">
       {project.link && (
         <a href={project.link} target="_blank" rel="noopener noreferrer">
             <Button variant="link" className="p-0 h-auto">
