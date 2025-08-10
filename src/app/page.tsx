@@ -293,7 +293,7 @@ export default function Home() {
                   <Button size="lg">Ver Proyectos</Button>
               </a>
               <a href="/CV-Daniel-Ferrer.pdf" download>
-                  <Button size="lg" variant="default">
+                  <Button size="lg" variant="outline">
                   <Download className="mr-2" /> Descargar CV
                   </Button>
               </a>
@@ -309,7 +309,7 @@ export default function Home() {
               <div className="mb-8 text-muted-foreground space-y-4 text-lg" dangerouslySetInnerHTML={{ __html: profileData?.about?.replace(/\\n/g, '<br />') || 'Soy un profesional dedicado...' }} />
               {profileData?.cvUrl && (
                 <a href={formatImageUrl(profileData.cvUrl)} target="_blank" rel="noopener noreferrer">
-                    <Button variant="outline" size="lg">
+                    <Button variant="secondary" size="lg">
                         <Eye className="mr-2" /> Ver CV en línea
                     </Button>
                 </a>
