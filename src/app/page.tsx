@@ -119,15 +119,6 @@ const ProjectCard = ({ project, priority = false }: { project: Project, priority
         </div>
       </div>
     </CardContent>
-    <CardFooter className="p-6 bg-muted/50 mt-auto">
-      {project.link && (
-        <a href={project.link} target="_blank" rel="noopener noreferrer">
-            <Button variant="link" className="p-0 h-auto">
-            Ver Proyecto <ChevronRight className="ml-1 h-4 w-4" />
-            </Button>
-        </a>
-      )}
-    </CardFooter>
   </Card>
 );
 
