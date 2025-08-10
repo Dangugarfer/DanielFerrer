@@ -6,10 +6,8 @@ export interface Project {
   title: string;
   description: string;
   technologies: string[];
-  link: string;
   imageUrl: string;
   screenshots: string[];
-  type: 'React' | 'Full-Stack' | 'Soporte Técnico' | 'Otro';
 }
 
 export interface Testimonial {

@@ -11,7 +11,6 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
-import { Badge } from '@/components/ui/badge';
 import { PlusCircle, MoreHorizontal, FilePenLine, Trash2, Loader2 } from 'lucide-react';
 import {
   DropdownMenu,
@@ -36,7 +35,6 @@ import { Project } from '@/lib/types';
 import { db } from '@/lib/firebase-config';
 import { collection, getDocs, addDoc, updateDoc, deleteDoc, doc } from 'firebase/firestore';
 import { useToast } from '@/hooks/use-toast';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from '@/components/ui/alert-dialog';
 import Image from 'next/image';
 import { formatImageUrl } from '@/lib/utils';
@@ -75,8 +73,6 @@ export default function ProjectsPage() {
         const title = formData.get('title') as string;
         const description = formData.get('description') as string;
         const technologies = (formData.get('technologies') as string).split(',').map(t => t.trim());
-        const link = formData.get('link') as string;
-        const type = formData.get('type') as Project['type'];
         const imageUrl = formData.get('imageUrl') as string;
         const screenshots = (formData.get('screenshots') as string)
           .split(',')
@@ -84,7 +80,7 @@ export default function ProjectsPage() {
           .filter(url => url);
 
         try {
-          const projectData = { title, description, technologies, link, type, imageUrl, screenshots };
+          const projectData = { title, description, technologies, imageUrl, screenshots };
 
           if (currentProject) {
             const projectRef = doc(db, 'projects', currentProject.id);
@@ -159,7 +155,6 @@ export default function ProjectsPage() {
             <TableRow>
               <TableHead className="hidden w-[100px] sm:table-cell">Imagen</TableHead>
               <TableHead>Título</TableHead>
-              <TableHead>Tipo</TableHead>
               <TableHead className="hidden md:table-cell">Tecnologías</TableHead>
               <TableHead>
                 <span className="sr-only">Acciones</span>
@@ -169,7 +164,7 @@ export default function ProjectsPage() {
           <TableBody>
             {projects.length === 0 ? (
                 <TableRow>
-                    <TableCell colSpan={5} className="h-24 text-center">
+                    <TableCell colSpan={4} className="h-24 text-center">
                         No se encontraron proyectos. ¡Añade uno nuevo!
                     </TableCell>
                 </TableRow>
@@ -188,9 +183,6 @@ export default function ProjectsPage() {
                   </div>
                 </TableCell>
                 <TableCell className="font-medium">{project.title}</TableCell>
-                <TableCell>
-                  <Badge variant="outline">{project.type}</Badge>
-                </TableCell>
                 <TableCell className="hidden md:table-cell">
                   {project.technologies.join(', ')}
                 </TableCell>
@@ -258,24 +250,6 @@ export default function ProjectsPage() {
                       <Input id="technologies" name="technologies" defaultValue={currentProject?.technologies.join(', ')} className="col-span-3" placeholder="React, Next.js, ..." required />
                   </div>
                   <div className="grid grid-cols-4 items-center gap-4">
-                      <Label htmlFor="link" className="text-right">Enlace</Label>
-                      <Input id="link" name="link" defaultValue={currentProject?.link} className="col-span-3" placeholder="https://..."/>
-                  </div>
-                  <div className="grid grid-cols-4 items-center gap-4">
-                      <Label htmlFor="type" className="text-right">Tipo</Label>
-                        <Select name="type" defaultValue={currentProject?.type}>
-                            <SelectTrigger className="col-span-3">
-                                <SelectValue placeholder="Selecciona un tipo" />
-                            </SelectTrigger>
-                            <SelectContent>
-                                <SelectItem value="Full-Stack">Full-Stack</SelectItem>
-                                <SelectItem value="React">React</SelectItem>
-                                <SelectItem value="Soporte Técnico">Soporte Técnico</SelectItem>
-                                <SelectItem value="Otro">Otro</SelectItem>
-                            </SelectContent>
-                        </Select>
-                  </div>
-                  <div className="grid grid-cols-4 items-center gap-4">
                     <Label htmlFor="imageUrl" className="text-right">URL Imagen Principal</Label>
                     <Input id="imageUrl" name="imageUrl" defaultValue={currentProject?.imageUrl} className="col-span-3" placeholder="https://..." required />
                   </div>
@@ -308,5 +282,3 @@ export default function ProjectsPage() {
     </Card>
   );
 }
-
-    
