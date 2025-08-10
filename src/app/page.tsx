@@ -155,6 +155,7 @@ const ContactForm = () => {
                 contact,
                 message,
                 createdAt: serverTimestamp(),
+                read: false,
             });
             toast({
                 title: '¡Mensaje Enviado!',
@@ -231,7 +232,6 @@ const ContactForm = () => {
 
 
 export default function Home() {
-  const [filter, setFilter] = useState('Todos');
   const [projectsData, setProjectsData] = useState<Project[]>([]);
   const [testimonialsData, setTestimonialsData] = useState<Testimonial[]>([]);
   const [profileData, setProfileData] = useState<Profile | null>(null);
@@ -271,12 +271,6 @@ export default function Home() {
     fetchData();
   }, []);
   
-  const projectTypes = ['Todos', ...Array.from(new Set(projectsData.map(p => p.type)))];
-
-  const filteredProjects = projectsData.filter(
-    (p) => filter === 'Todos' || p.type === filter
-  );
-
   if (loading) {
     return (
       <div className="flex h-screen items-center justify-center bg-background">
@@ -307,7 +301,7 @@ export default function Home() {
                   <Button size="lg">Ver Proyectos</Button>
               </a>
               <a href="/CV-Daniel-Ferrer.pdf" download>
-                  <Button size="lg" variant="outline">
+                  <Button size="lg" variant="default">
                   <Download className="mr-2" /> Descargar CV
                   </Button>
               </a>
@@ -320,10 +314,10 @@ export default function Home() {
           <div className="container mx-auto px-4 grid md:grid-cols-2 gap-16 items-center">
             <div>
               <h2 className="text-4xl md:text-5xl font-bold font-headline mb-8">Sobre Mí</h2>
-              <div className="mb-8 text-muted-foreground space-y-4 text-lg" dangerouslySetInnerHTML={{ __html: profileData?.about?.replace(/\n/g, '<br />') || 'Soy un profesional dedicado...' }} />
+              <div className="mb-8 text-muted-foreground space-y-4 text-lg" dangerouslySetInnerHTML={{ __html: profileData?.about?.replace(/\\n/g, '<br />') || 'Soy un profesional dedicado...' }} />
               {profileData?.cvUrl && (
                 <a href={formatImageUrl(profileData.cvUrl)} target="_blank" rel="noopener noreferrer">
-                    <Button variant="secondary" size="lg">
+                    <Button variant="outline" size="lg">
                         <Eye className="mr-2" /> Ver CV en línea
                     </Button>
                 </a>
@@ -343,21 +337,9 @@ export default function Home() {
                 <h2 className="text-4xl md:text-5xl font-bold font-headline">Proyectos</h2>
                 <p className="text-muted-foreground mt-2 text-lg">Una selección de mi trabajo reciente.</p>
             </div>
-            <div className="flex justify-center gap-2 mb-12 flex-wrap">
-              {projectTypes.map((type) => (
-                <Button
-                  key={type}
-                  variant={filter === type ? 'default' : 'outline'}
-                  onClick={() => setFilter(type)}
-                  className="px-6"
-                >
-                  {type}
-                </Button>
-              ))}
-            </div>
              {projectsData.length > 0 ? (
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                  {filteredProjects.map((project, index) => (
+                  {projectsData.map((project, index) => (
                     <ProjectCard key={project.id} project={project} priority={index < 3} />
                   ))}
                 </div>
@@ -566,3 +548,5 @@ export default function Home() {
     </div>
   );
 }
+
+    
