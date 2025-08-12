@@ -1,4 +1,5 @@
 Portafolio Digital - Daniel Ferrer
+
 Bienvenido a mi portafolio digital, donde presento una colección de proyectos personales y profesionales desarrollados principalmente con tecnologías web modernas. Este repositorio contiene las aplicaciones y sistemas que reflejan mis habilidades como desarrollador Full Stack y profesional en Tecnologías de la Información.
 
 Acerca de mí
