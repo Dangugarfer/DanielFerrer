@@ -22,7 +22,8 @@ import {
   Copy,
   Loader2,
   Cpu,
-  Layers3
+  Layers3,
+  Database
 } from 'lucide-react';
 import { Header } from '@/components/header';
 import { Footer } from '@/components/footer';
@@ -293,7 +294,7 @@ export default function Home() {
                   <Button size="lg">Ver Proyectos</Button>
               </a>
               <a href="/CV-Daniel-Ferrer.pdf" download>
-                  <Button size="lg" variant="outline">
+                  <Button size="lg" variant="default">
                   <Download className="mr-2" /> Descargar CV
                   </Button>
               </a>
@@ -309,7 +310,7 @@ export default function Home() {
               <div className="mb-8 text-muted-foreground space-y-4 text-lg" dangerouslySetInnerHTML={{ __html: profileData?.about?.replace(/\\n/g, '<br />') || 'Soy un profesional dedicado...' }} />
               {profileData?.cvUrl && (
                 <a href={formatImageUrl(profileData.cvUrl)} target="_blank" rel="noopener noreferrer">
-                    <Button variant="secondary" size="lg">
+                    <Button variant="outline" size="lg">
                         <Eye className="mr-2" /> Ver CV en línea
                     </Button>
                 </a>
@@ -413,8 +414,8 @@ export default function Home() {
                 <CardContent className="flex flex-wrap justify-center gap-2">
                   <Badge variant="outline" className="text-md px-4 py-1">React</Badge>
                   <Badge variant="outline" className="text-md px-4 py-1">Next.js</Badge>
+                  <Badge variant="outline" className="text-md px-4 py-1">Vue.js</Badge>
                   <Badge variant="outline" className="text-md px-4 py-1">JavaScript</Badge>
-                  <Badge variant="outline" className="text-md px-4 py-1">TypeScript</Badge>
                   <Badge variant="outline" className="text-md px-4 py-1">Tailwind CSS</Badge>
                 </CardContent>
               </Card>
@@ -424,7 +425,18 @@ export default function Home() {
                 <CardContent className="flex flex-wrap justify-center gap-2">
                   <Badge variant="outline" className="text-md px-4 py-1">Node.js</Badge>
                   <Badge variant="outline" className="text-md px-4 py-1">Express</Badge>
+                  <Badge variant="outline" className="text-md px-4 py-1">PHP</Badge>
+                  <Badge variant="outline" className="text-md px-4 py-1">Java</Badge>
+                  <Badge variant="outline" className="text-md px-4 py-1">Python</Badge>
                   <Badge variant="outline" className="text-md px-4 py-1">Firebase</Badge>
+                </CardContent>
+              </Card>
+              <Card className="group relative transition-all duration-300 hover:shadow-2xl hover:shadow-primary/20 hover:-translate-y-1">
+                <div className="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-primary/10 opacity-0 transition-opacity duration-500 group-hover:opacity-100 card-glow"></div>
+                <CardHeader><CardTitle className="text-2xl flex items-center justify-center gap-3"><Database/>Bases de Datos</CardTitle></CardHeader>
+                <CardContent className="flex flex-wrap justify-center gap-2">
+                   <Badge variant="outline" className="text-md px-4 py-1">MySQL/MariaDB (SQL)</Badge>
+                   <Badge variant="outline" className="text-md px-4 py-1">Firestore</Badge>
                 </CardContent>
               </Card>
               <Card className="group relative transition-all duration-300 hover:shadow-2xl hover:shadow-primary/20 hover:-translate-y-1">
